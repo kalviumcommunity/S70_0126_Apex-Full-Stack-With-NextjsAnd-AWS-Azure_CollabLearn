@@ -6,7 +6,7 @@ CollabLearn is a collaborative learning platform designed to improve student eng
 
 ## 🚩 Problem Statement
 
-Educational institutions often lack real-time visibility into:
+Educational institutions often lack real-time visibility into :
 - Student engagement
 - Project progress
 - Team collaboration
