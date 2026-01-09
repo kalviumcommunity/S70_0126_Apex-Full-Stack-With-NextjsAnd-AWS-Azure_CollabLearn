@@ -118,3 +118,4 @@ This project is developed for educational purposes.
 
 ## Initial Setup
 Project structure initialized with frontend, backend, and docs folders.
+PR verification test
