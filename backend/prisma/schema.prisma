@@ -13,7 +13,7 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      String   @default("STUDENT") // MENTOR or STUDENT
+  role      String   @default("STUDENT") // Valid values: "MENTOR" or "STUDENT"
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -34,7 +34,7 @@ model Project {
 
   // Foreign Key to Mentor
   mentorId String
-  mentor   User   @relation("ProjectOwner", fields: [mentorId], references: [id], onDelete: Cascade)
+  mentor   User   @relation("ProjectOwner", fields: [mentorId], references: [id], onDelete: Restrict)
 
   // Relations
   members   ProjectMember[]
@@ -61,7 +61,7 @@ model ProjectMember {
 model Task {
   id           String   @id @default(uuid())
   title        String
-  status       String   @default("TODO") // TODO, IN_PROGRESS, or DONE
+  status       String   @default("TODO") // Valid values: "TODO", "IN_PROGRESS", or "DONE"
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -93,7 +93,7 @@ model PeerFeedback {
 
 model EngagementLog {
   id         String   @id @default(uuid())
-  actionType String   // LOGIN, TASK_UPDATE, or FEEDBACK
+  actionType String   // Valid values: "LOGIN", "TASK_UPDATE", or "FEEDBACK"
   details    String?
   createdAt  DateTime @default(now())
 
