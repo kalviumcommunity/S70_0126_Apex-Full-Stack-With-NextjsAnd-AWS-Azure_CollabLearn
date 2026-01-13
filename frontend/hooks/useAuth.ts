@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { User } from '../types'
 
 export default function useAuth() {
-  const [user, setUser] = useState<User | null>(null)
-
-  useEffect(() => {
-    // placeholder: load user from localStorage
-    const raw = typeof window !== 'undefined' ? localStorage.getItem('user') : null
-    if (raw) setUser(JSON.parse(raw))
-  }, [])
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window !== 'undefined') {
+      const raw = localStorage.getItem('user')
+      return raw ? (JSON.parse(raw) as User) : null
+    }
+    return null
+  })
 
   return { user, setUser }
 }
