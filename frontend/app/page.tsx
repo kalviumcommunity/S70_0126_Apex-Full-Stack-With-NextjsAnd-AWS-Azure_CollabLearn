@@ -132,7 +132,7 @@ export default function Home() {
       <section className="px-4 py-20 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to Start Learning?</h2>
-          <p className="text-xl text-gray-600 mb-8">Join thousands of students and start your learning journey today. It's free!</p>
+          <p className="text-xl text-gray-600 mb-8">Join thousands of students and start your learning journey today. It&apos;s free!</p> 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/signup"
