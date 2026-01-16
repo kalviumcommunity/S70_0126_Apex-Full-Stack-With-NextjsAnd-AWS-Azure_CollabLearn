@@ -25,10 +25,15 @@ export default function DashboardPage() {
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    localStorage.removeItem('userRole')
     setUser(null)
     router.push('/')
   }
 
+  const switchToMentor = () => {
+    localStorage.setItem('userRole', 'mentor')
+    router.push('/mentor/dashboard')
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -43,6 +48,12 @@ export default function DashboardPage() {
           <div className="flex items-center space-x-6">
             <span className="text-gray-600">Welcome, <strong>{user?.name || user?.email}</strong></span>
             <button
+              onClick={switchToMentor}
+              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium text-sm"
+            >
+              🎓 Mentor Mode
+            </button>
+            <button
               onClick={handleLogout}
               className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
             >
@@ -51,6 +62,13 @@ export default function DashboardPage() {
           </div>
         </div>
       </header>
+
+      {/* Role Information */}
+      <div className="bg-blue-50 border-b border-blue-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-blue-800">
+          You are in <strong>Student Mode</strong>. Click "🎓 Mentor Mode" to switch to mentor view if you're an instructor.
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
