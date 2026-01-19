@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { User } from '@/types'
+import { SearchFilter } from '@/components/common/SearchFilter'
+import { UserProfile } from '@/components/common/UserProfile'
 
 interface Stats {
   coursesEnrolled: number
@@ -14,6 +16,8 @@ interface Stats {
 export default function DashboardPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('all')
   const [user, setUser] = useState<User | null>(() => {
     if (typeof window === 'undefined') return null
     const raw = localStorage.getItem('user')
@@ -99,6 +103,15 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* User Profile Section */}
+        <UserProfile user={user} stats={stats} />
+
+        {/* Search and Filter Section */}
+        <SearchFilter
+          onSearch={(query) => setSearchQuery(query)}
+          onCategoryChange={(category) => setSelectedCategory(category)}
+        />
+
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg p-8 mb-12 shadow-lg">
           <h2 className="text-4xl font-bold mb-4">Welcome to CollabLearn!</h2>
