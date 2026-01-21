@@ -3,12 +3,17 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { CreateCourseModal } from '@/components/mentor/CreateCourseModal'
+import { AddMenteeModal } from '@/components/mentor/AddMenteeModal'
 
 export default function MentorDashboard() {
   const router = useRouter()
   const [mentor, setMentor] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
+  const [isCreateCourseModalOpen, setIsCreateCourseModalOpen] = useState(false)
+  const [isAddMenteeModalOpen, setIsAddMenteeModalOpen] = useState(false)
+  const [isEditingProfile, setIsEditingProfile] = useState(false)
 
   useEffect(() => {
     // Check if user is logged in
@@ -41,6 +46,22 @@ export default function MentorDashboard() {
     router.push('/')
   }
 
+  const handleCreateCourse = (courseData: any) => {
+    alert('Course created successfully!')
+    console.log('New course:', courseData)
+  }
+
+  const handleAddMentee = (menteeData: any) => {
+    alert(`Invitation sent to ${menteeData.email}`)
+    console.log('New mentee:', menteeData)
+  }
+
+  const handleSaveProfile = (e: React.FormEvent) => {
+    e.preventDefault()
+    alert('Profile updated successfully!')
+    setIsEditingProfile(false)
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -69,6 +90,15 @@ export default function MentorDashboard() {
             <div className="flex items-center space-x-6">
               <span className="text-gray-600">Welcome, <strong>{mentor?.name || mentor?.email}</strong></span>
               <button
+                onClick={() => {
+                  localStorage.setItem('userRole', 'student')
+                  router.push('/dashboard')
+                }}
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-medium text-sm"
+              >
+                👤 Student Mode
+              </button>
+              <button
                 onClick={handleLogout}
                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
               >
@@ -93,11 +123,10 @@ export default function MentorDashboard() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-2 border-b-2 font-medium text-sm transition ${
-                  activeTab === tab.id
-                    ? 'border-blue-600 text-blue-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
-                }`}
+                className={`py-4 px-2 border-b-2 font-medium text-sm transition ${activeTab === tab.id
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+                  }`}
               >
                 {tab.icon} {tab.label}
               </button>
@@ -158,10 +187,16 @@ export default function MentorDashboard() {
                 You're making a real impact on your mentees' learning journeys. Keep up the great work!
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition">
+                <button
+                  onClick={() => setIsCreateCourseModalOpen(true)}
+                  className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition"
+                >
                   Create New Course
                 </button>
-                <button className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+                <button
+                  onClick={() => setActiveTab('mentees')}
+                  className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+                >
                   View Mentee Progress
                 </button>
               </div>
@@ -222,7 +257,10 @@ export default function MentorDashboard() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">Your Mentees</h2>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+              <button
+                onClick={() => setIsAddMenteeModalOpen(true)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              >
                 + Add Mentee
               </button>
             </div>
@@ -249,18 +287,24 @@ export default function MentorDashboard() {
                       <span className="text-sm font-semibold text-gray-900">{mentee.progress}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-blue-600 h-2 rounded-full" 
+                      <div
+                        className="bg-blue-600 h-2 rounded-full"
                         style={{ width: `${mentee.progress}%` }}
                       ></div>
                     </div>
                   </div>
                   <p className="text-xs text-gray-500 mb-4">Joined {mentee.joinDate}</p>
                   <div className="flex gap-2">
-                    <button className="flex-1 px-3 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition text-sm font-medium">
+                    <button
+                      onClick={() => router.push(`/mentor/mentees/${mentee.id}`)}
+                      className="flex-1 px-3 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition text-sm font-medium"
+                    >
                       View Progress
                     </button>
-                    <button className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium">
+                    <button
+                      onClick={() => router.push('/messages')}
+                      className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium"
+                    >
                       Message
                     </button>
                   </div>
@@ -275,7 +319,10 @@ export default function MentorDashboard() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">My Courses</h2>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+              <button
+                onClick={() => setIsCreateCourseModalOpen(true)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              >
                 + Create Course
               </button>
             </div>
@@ -291,11 +338,10 @@ export default function MentorDashboard() {
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-3">
                       <h3 className="text-lg font-bold text-gray-900">{course.title}</h3>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        course.status === 'Published' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${course.status === 'Published'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                        }`}>
                         {course.status}
                       </span>
                     </div>
@@ -314,10 +360,16 @@ export default function MentorDashboard() {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <button className="flex-1 px-3 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition text-sm font-medium">
+                      <button
+                        onClick={() => alert('Course editing coming soon!')}
+                        className="flex-1 px-3 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition text-sm font-medium"
+                      >
                         Edit
                       </button>
-                      <button className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium">
+                      <button
+                        onClick={() => alert('Course details page coming soon!')}
+                        className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium"
+                      >
                         View
                       </button>
                     </div>
@@ -391,8 +443,11 @@ export default function MentorDashboard() {
                     <p className="text-sm text-gray-600"><strong>Experience:</strong> 5+ years</p>
                     <p className="text-sm text-gray-600"><strong>Expertise:</strong> Web Development</p>
                   </div>
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
-                    Edit Profile
+                  <button
+                    onClick={() => setIsEditingProfile(!isEditingProfile)}
+                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                  >
+                    {isEditingProfile ? 'Cancel' : 'Edit Profile'}
                   </button>
                 </div>
               </div>
@@ -400,7 +455,7 @@ export default function MentorDashboard() {
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-lg shadow p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-6">About You</h3>
-                  <form className="space-y-6">
+                  <form onSubmit={handleSaveProfile} className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
                       <textarea
@@ -408,6 +463,7 @@ export default function MentorDashboard() {
                         rows={4}
                         placeholder="Tell mentees about your experience and expertise..."
                         defaultValue="Passionate educator with 5+ years of experience in web development. Specializing in React, Node.js, and full-stack development."
+                        disabled={!isEditingProfile}
                       ></textarea>
                     </div>
 
@@ -418,6 +474,7 @@ export default function MentorDashboard() {
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="e.g., React, Node.js, Python"
                         defaultValue="React, Node.js, Full Stack Development"
+                        disabled={!isEditingProfile}
                       />
                     </div>
 
@@ -427,23 +484,27 @@ export default function MentorDashboard() {
                         type="number"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         defaultValue="20"
+                        disabled={!isEditingProfile}
                       />
                     </div>
 
-                    <div className="flex gap-4">
-                      <button
-                        type="submit"
-                        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
-                      >
-                        Save Changes
-                      </button>
-                      <button
-                        type="button"
-                        className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium"
-                      >
-                        Cancel
-                      </button>
-                    </div>
+                    {isEditingProfile && (
+                      <div className="flex gap-4">
+                        <button
+                          type="submit"
+                          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                        >
+                          Save Changes
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setIsEditingProfile(false)}
+                          className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    )}
                   </form>
                 </div>
               </div>
@@ -451,6 +512,18 @@ export default function MentorDashboard() {
           </div>
         )}
       </main>
+
+      {/* Modals */}
+      <CreateCourseModal
+        isOpen={isCreateCourseModalOpen}
+        onClose={() => setIsCreateCourseModalOpen(false)}
+        onSubmit={handleCreateCourse}
+      />
+      <AddMenteeModal
+        isOpen={isAddMenteeModalOpen}
+        onClose={() => setIsAddMenteeModalOpen(false)}
+        onSubmit={handleAddMentee}
+      />
     </div>
   )
 }
