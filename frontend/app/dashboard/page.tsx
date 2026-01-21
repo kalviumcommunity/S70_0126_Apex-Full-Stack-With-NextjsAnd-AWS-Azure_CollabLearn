@@ -2,37 +2,49 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import type { User } from '@/types'
+import Link from 'next/link'
 
 export default function DashboardPage() {
   const router = useRouter()
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window === 'undefined') return null
-    const raw = localStorage.getItem('user')
-    return raw ? (JSON.parse(raw) as User) : null
-  })
+  const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // Check if user is logged in
     const token = localStorage.getItem('token')
+    const userData = localStorage.getItem('user')
 
     if (!token) {
       router.push('/login')
       return
     }
+
+    if (userData) {
+      setUser(JSON.parse(userData))
+    }
+    setLoading(false)
   }, [router])
 
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     localStorage.removeItem('userRole')
-    setUser(null)
     router.push('/')
   }
 
   const switchToMentor = () => {
-    localStorage.setItem('userRole', 'mentor')
-    router.push('/mentor/dashboard')
+    router.push('/mentor/login')
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -79,10 +91,16 @@ export default function DashboardPage() {
             Start your learning journey today. Explore courses, join study groups, and collaborate with peers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition">
+            <button
+              onClick={() => router.push('/courses')}
+              className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition"
+            >
               Explore Courses
             </button>
-            <button className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+            <button
+              onClick={() => router.push('/study-groups')}
+              className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+            >
               Join Study Group
             </button>
           </div>
@@ -114,18 +132,21 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
+                id: 'c1',
                 title: 'Web Development Fundamentals',
                 description: 'Learn HTML, CSS, and JavaScript basics',
                 level: 'Beginner',
                 students: '5,200'
               },
               {
+                id: 'c2',
                 title: 'React & Modern JavaScript',
                 description: 'Build interactive UIs with React',
                 level: 'Intermediate',
                 students: '3,800'
               },
               {
+                id: 'c3',
                 title: 'Full Stack Development',
                 description: 'Master frontend and backend development',
                 level: 'Advanced',
@@ -141,7 +162,10 @@ export default function DashboardPage() {
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full">{course.level}</span>
                     <span>{course.students} students</span>
                   </div>
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+                  <button
+                    onClick={() => router.push(`/courses/${course.id}`)}
+                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                  >
                     Enroll Now
                   </button>
                 </div>
@@ -181,7 +205,10 @@ export default function DashboardPage() {
                 <p className="text-gray-600 text-sm mb-4">{group.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">{group.members} members</span>
-                  <button className="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition font-medium text-sm">
+                  <button
+                    onClick={() => router.push('/study-groups')}
+                    className="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition font-medium text-sm"
+                  >
                     Join Group
                   </button>
                 </div>
