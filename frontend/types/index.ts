@@ -1,13 +1,41 @@
+/**
+ * Role type definition
+ */
 export type Role = 'STUDENT' | 'MENTOR'
 
+/**
+ * User type definition with comprehensive properties
+ */
 export type User = {
   id: string
   email: string
   name: string
   role: Role
   avatar?: string
+  createdAt?: Date
   specializations?: string[]
   bio?: string
+}
+
+/**
+ * Course type definition
+ */
+export interface Course {
+  id: string
+  title: string
+  description: string
+  instructor: string
+  thumbnail?: string
+  rating: number
+  students: number
+}
+
+/**
+ * Authentication response type
+ */
+export interface AuthResponse {
+  token: string
+  user: User
 }
 
 export type Project = {
