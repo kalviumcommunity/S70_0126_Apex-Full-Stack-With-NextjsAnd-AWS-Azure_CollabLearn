@@ -190,6 +190,20 @@ export const mockCourses = [
         instructorId: 'u2',
         tags: ['TypeScript', 'JavaScript'],
         enrolled: true
+    },
+    {
+        id: 'c5',
+        title: 'Advanced Next.js Patterns',
+        description: 'Deep dive into App Router, Server Actions, and Advanced Caching',
+        level: 'Advanced',
+        students: 1200,
+        rating: 4.9,
+        modules: 14,
+        duration: '8 weeks',
+        instructor: 'Sarah Mentor',
+        instructorId: 'u2',
+        tags: ['Next.js', 'React', 'TypeScript'],
+        enrolled: false
     }
 ]
 
@@ -254,5 +268,15 @@ export const mockStudyGroups = [
         isJoined: false,
         meetingSchedule: 'Saturdays, 4 PM',
         topics: ['Figma', 'Design Systems', 'Accessibility']
+    },
+    {
+        id: 'sg7',
+        name: 'Next.js Enthusiasts',
+        description: 'A group for discussing the latest in Next.js ecosystem',
+        members: 150,
+        category: 'Frontend',
+        isJoined: false,
+        meetingSchedule: 'Fridays, 5 PM',
+        topics: ['Next.js', 'Vercel', 'Edge Functions']
     }
 ]
