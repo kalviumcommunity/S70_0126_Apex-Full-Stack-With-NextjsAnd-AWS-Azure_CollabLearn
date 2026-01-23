@@ -39,7 +39,7 @@ export default function SignupPage() {
       const result = await signup(email, password)
       localStorage.setItem('token', result.token)
       localStorage.setItem('user', JSON.stringify({ ...result.user, name: fullName }))
-      
+
       router.push('/dashboard')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Signup failed. Please try again.')
@@ -54,7 +54,7 @@ export default function SignupPage() {
         <div className="bg-white rounded-lg shadow-xl p-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Join CollabLearn</h1>
-            <p className="text-gray-600 mt-2">Create your account and start collaborating</p>
+            <p className="text-gray-800 mt-2">Create your account and start collaborating</p>
           </div>
 
           {error && (
@@ -65,7 +65,7 @@ export default function SignupPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="fullName" className="block text-sm font-medium text-gray-900 mb-2">
                 Full Name
               </label>
               <input
@@ -80,7 +80,7 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
                 Email Address
               </label>
               <input
@@ -95,7 +95,7 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
                 Password
               </label>
               <input
@@ -107,11 +107,11 @@ export default function SignupPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 disabled={loading}
               />
-              <p className="text-xs text-gray-500 mt-1">At least 8 characters</p>
+              <p className="text-xs text-gray-700 mt-1">At least 8 characters</p>
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 mb-2">
                 Confirm Password
               </label>
               <input
@@ -132,7 +132,7 @@ export default function SignupPage() {
                 disabled={loading}
                 required
               />
-              <span className="ml-2 text-sm text-gray-600">
+              <span className="ml-2 text-sm text-gray-800">
                 I agree to the{' '}
                 <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
                   Terms of Service
@@ -155,20 +155,20 @@ export default function SignupPage() {
 
           <div className="my-6 flex items-center">
             <div className="flex-grow border-t border-gray-300"></div>
-            <span className="px-4 text-gray-500 text-sm">OR</span>
+            <span className="px-4 text-gray-700 text-sm">OR</span>
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
 
           <div className="space-y-3">
-            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
               🔤 Continue with Google
             </button>
-            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
               📱 Continue with GitHub
             </button>
           </div>
 
-          <p className="mt-8 text-center text-gray-600">
+          <p className="mt-8 text-center text-gray-800">
             Already have an account?{' '}
             <Link href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
               Sign in here

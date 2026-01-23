@@ -29,7 +29,7 @@ export default function LoginPage() {
       const result = await login(email, password)
       localStorage.setItem('token', result.token)
       localStorage.setItem('user', JSON.stringify(result.user))
-      
+
       router.push('/dashboard')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.')
@@ -44,7 +44,7 @@ export default function LoginPage() {
         <div className="bg-white rounded-lg shadow-xl p-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-            <p className="text-gray-600 mt-2">Sign in to your CollabLearn account</p>
+            <p className="text-gray-800 mt-2">Sign in to your CollabLearn account</p>
           </div>
 
           {error && (
@@ -55,7 +55,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
                 Email Address
               </label>
               <input
@@ -70,7 +70,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
                 Password
               </label>
               <input
@@ -91,7 +91,7 @@ export default function LoginPage() {
                   className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   disabled={loading}
                 />
-                <span className="ml-2 text-gray-600">Remember me</span>
+                <span className="ml-2 text-gray-800">Remember me</span>
               </label>
               <Link href="#" className="text-blue-600 hover:text-blue-700 font-medium">
                 Forgot password?
@@ -109,20 +109,20 @@ export default function LoginPage() {
 
           <div className="my-6 flex items-center">
             <div className="flex-grow border-t border-gray-300"></div>
-            <span className="px-4 text-gray-500 text-sm">OR</span>
+            <span className="px-4 text-gray-700 text-sm">OR</span>
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
 
           <div className="space-y-3">
-            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
               🔤 Continue with Google
             </button>
-            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+            <button type="button" className="w-full border border-gray-300 hover:bg-gray-50 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
               📱 Continue with GitHub
             </button>
           </div>
 
-          <p className="mt-8 text-center text-gray-600">
+          <p className="mt-8 text-center text-gray-800">
             Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-blue-600 hover:text-blue-700 font-semibold">
               Sign up here
@@ -130,7 +130,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <p className="mt-6 text-center text-gray-500 text-xs">
+        <p className="mt-6 text-center text-gray-700 text-xs">
           By signing in, you agree to our{' '}
           <a href="#" className="underline hover:text-gray-700">
             Terms of Service
