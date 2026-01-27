@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db"; // Assuming @ alias works, if not we can use relative path
+import { prisma } from "@/lib/db"; // Assuming @ alias works, if not we can use relative 
 
 export async function GET(
     request: Request,
