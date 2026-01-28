@@ -54,9 +54,10 @@ export function Footer() {
               © {currentYear} CollabLearn. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition">Twitter</a>
+              <a href="#" className="hover:text-white transition">X (Twitter)</a>
               <a href="#" className="hover:text-white transition">GitHub</a>
               <a href="#" className="hover:text-white transition">LinkedIn</a>
+              <a href="#" className="hover:text-white transition">Discord</a>
             </div>
           </div>
         </div>
