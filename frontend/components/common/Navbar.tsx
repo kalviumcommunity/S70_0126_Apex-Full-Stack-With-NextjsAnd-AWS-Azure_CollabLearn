@@ -40,7 +40,9 @@ export function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-600 hover:bg-gray-100"
+              className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isOpen ? (

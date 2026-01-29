@@ -26,14 +26,14 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Resources */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <h4 className="text-white font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:text-white transition">About</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Blog</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Careers</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Contact</Link></li>
+              <li><Link href="#" className="hover:text-white transition">Documentation</Link></li>
+              <li><Link href="#" className="hover:text-white transition">Help Center</Link></li>
+              <li><Link href="#" className="hover:text-white transition">Community</Link></li>
+              <li><Link href="#" className="hover:text-white transition">API Reference</Link></li>
             </ul>
           </div>
 
@@ -51,12 +51,45 @@ export function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">
-              © {currentYear} CollabLearn. All rights reserved.
+              © {currentYear} CollabLearn. Built with ❤️ for learners worldwide.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition">Twitter</a>
-              <a href="#" className="hover:text-white transition">GitHub</a>
-              <a href="#" className="hover:text-white transition">LinkedIn</a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition"
+                aria-label="Follow us on X (Twitter)"
+              >
+                𝕏 Twitter
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition"
+                aria-label="View our GitHub repository"
+              >
+                ⚡ GitHub
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition"
+                aria-label="Connect with us on LinkedIn"
+              >
+                💼 LinkedIn
+              </a>
+              <a
+                href="https://discord.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition"
+                aria-label="Join our Discord community"
+              >
+                💬 Discord
+              </a>
             </div>
           </div>
         </div>

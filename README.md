@@ -1,6 +1,23 @@
 # CollabLearn Team Project
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A collaborative learning platform built with Next.js that enables students to learn together, share knowledge, and build amazing projects in a vibrant community.
+
+## Features
+
+✨ **Collaborative Learning** - Work together with classmates and teammates on projects in real-time  
+📚 **Comprehensive Courses** - Access expert-curated courses and tutorials  
+👥 **Study Groups** - Join or create study groups to learn with peers  
+🚀 **Project Showcase** - Build your portfolio and showcase your work  
+💼 **Mentor System** - Connect with experienced mentors for guidance  
+🎯 **Progress Tracking** - Track your learning journey and achievements
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript
+- **Styling**: Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: MongoDB/PostgreSQL
+- **Authentication**: JWT-based authentication
 
 ## Getting Started
 
