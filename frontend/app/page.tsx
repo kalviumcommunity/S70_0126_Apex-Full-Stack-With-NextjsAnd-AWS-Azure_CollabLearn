@@ -15,7 +15,7 @@ export default function Home() {
               Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">CollabLearn</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Collaborate, learn, and grow together. Connect with peers, share knowledge, and build amazing projects in a vibrant community.
+              Your journey to mastery starts here. Connect with peers, access world-class resources, and build projects that matter in a supportive learning community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
